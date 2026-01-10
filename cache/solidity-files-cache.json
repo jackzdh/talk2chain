@@ -1,0 +1,77 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/Users/dahai/talk2chain/contracts/MockGateway.sol": {
+      "lastModificationDate": 1768012340657,
+      "contentHash": "738f57a51a47d62af19435515db343d8",
+      "sourceName": "contracts/MockGateway.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IGatewayVM",
+        "MockGateway"
+      ]
+    },
+    "/Users/dahai/talk2chain/contracts/WestendFrequencyCrossChain.sol": {
+      "lastModificationDate": 1768014111674,
+      "contentHash": "e4d090cba1d8580afed4d303b2dcfa49",
+      "sourceName": "contracts/WestendFrequencyCrossChain.sol",
+      "solcConfig": {
+        "version": "0.8.0",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IGatewayVM",
+        "WestendFrequencyCrossChain"
+      ]
+    }
+  }
+}

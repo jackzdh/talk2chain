@@ -1,0 +1,34 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IGatewayVM",
+  "sourceName": "contracts/MockGateway.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "destinationChainId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "destinationAddress",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint256",
+          "name": "destinationGasLimit",
+          "type": "uint256"
+        }
+      ],
+      "name": "sendDot",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

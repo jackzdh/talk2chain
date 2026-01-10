@@ -1,0 +1,69 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "MockGateway",
+  "sourceName": "contracts/MockGateway.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "destinationChainId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "destinationAddress",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "destinationGasLimit",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "SendDotCalled",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "destinationChainId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "destinationAddress",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint256",
+          "name": "destinationGasLimit",
+          "type": "uint256"
+        }
+      ],
+      "name": "sendDot",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b50610181806100206000396000f3fe6080604052600436106100225760003560e01c8063d5e487a31461002e57610029565b3661002957005b600080fd5b61004161003c366004610088565b610043565b005b7f994f7b882f316e2640656fafa3f57911e92b791d9b99a7ac6ef203d1352db8ef848484843460405161007a959493929190610105565b60405180910390a150505050565b6000806000806060858703121561009d578384fd5b84359350602085013567ffffffffffffffff808211156100bb578485fd5b818701915087601f8301126100ce578485fd5b8135818111156100dc578586fd5b8860208285010111156100ed578586fd5b95986020929092019750949560400135945092505050565b600086825260806020830152846080830152848660a08401378060a0868401015260a0601f19601f8701168301019050836040830152826060830152969550505050505056fea2646970667358221220ad7c2731ff6c7b30863c86e68698ad0c94d1a269e25120fdb3123a82e4f83db764736f6c63430008000033",
+  "deployedBytecode": "0x6080604052600436106100225760003560e01c8063d5e487a31461002e57610029565b3661002957005b600080fd5b61004161003c366004610088565b610043565b005b7f994f7b882f316e2640656fafa3f57911e92b791d9b99a7ac6ef203d1352db8ef848484843460405161007a959493929190610105565b60405180910390a150505050565b6000806000806060858703121561009d578384fd5b84359350602085013567ffffffffffffffff808211156100bb578485fd5b818701915087601f8301126100ce578485fd5b8135818111156100dc578586fd5b8860208285010111156100ed578586fd5b95986020929092019750949560400135945092505050565b600086825260806020830152846080830152848660a08401378060a0868401015260a0601f19601f8701168301019050836040830152826060830152969550505050505056fea2646970667358221220ad7c2731ff6c7b30863c86e68698ad0c94d1a269e25120fdb3123a82e4f83db764736f6c63430008000033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

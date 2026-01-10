@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加 Frequency TestNet 到钱包</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .network-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .network-info h3 {
+            margin-top: 0;
+            color: #667eea;
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+        }
+        .info-value {
+            color: #6c757d;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔗 添加 Frequency TestNet</h1>
+        <p class="subtitle">将 Frequency TestNet 网络添加到您的 MetaMask 钱包</p>
+
+        <div class="network-info">
+            <h3>📋 网络信息</h3>
+            <div class="info-item">
+                <span class="info-label">网络名称</span>
+                <span class="info-value">Frequency TestNet</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Chain ID</span>
+                <span class="info-value">2001 (0x7D1)</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">代币符号</span>
+                <span class="info-value">FRQ</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">代币精度</span>
+                <span class="info-value">18</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">RPC URL</span>
+                <span class="info-value">https://rpc.testnet.frequency.xyz</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">区块浏览器</span>
+                <span class="info-value">https://explorer.testnet.frequency.xyz</span>
+            </div>
+        </div>
+
+        <button id="addNetworkBtn" onclick="addNetwork()">
+            ➕ 添加网络到钱包
+        </button>
+
+        <div id="status" class="status"></div>
+    </div>
+
+    <script>
+        const frequencyNetwork = {
+            chainId: '0x7D1',
+            chainName: 'Frequency TestNet',
+            nativeCurrency: {
+                name: 'FRQ',
+                symbol: 'FRQ',
+                decimals: 18
+            },
+            rpcUrls: ['https://rpc.testnet.frequency.xyz'],
+            blockExplorerUrls: ['https://explorer.testnet.frequency.xyz']
+        };
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            statusDiv.style.display = 'block';
+            console.log(`[状态显示] ${type.toUpperCase()}: ${message}`);
+        }
+
+        function logDebug(message, data = null) {
+            console.log(`[调试] ${message}`, data || '');
+        }
+
+        function logError(message, error = null) {
+            console.error(`[错误] ${message}`, error || '');
+        }
+
+        async function addNetwork() {
+            const btn = document.getElementById('addNetworkBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ 处理中...';
+
+            logDebug('开始添加网络流程');
+            logDebug('window 对象存在:', typeof window !== 'undefined');
+            logDebug('window.ethereum:', window.ethereum);
+            logDebug('window.ethereum 类型:', typeof window.ethereum);
+
+            if (typeof window.ethereum === 'undefined') {
+                logError('未检测到 MetaMask 钱包');
+                logDebug('window 对象的属性:', Object.keys(window).filter(key => key.toLowerCase().includes('eth')));
+                showStatus('❌ 未检测到 MetaMask 钱包。请先安装 MetaMask 浏览器扩展。', 'error');
+                btn.disabled = false;
+                btn.textContent = '➕ 添加网络到钱包';
+                return;
+            }
+
+            try {
+                logDebug('MetaMask 已检测到，开始添加网络');
+                showStatus('🔄 正在添加网络到钱包...', 'info');
+
+                const params = [{
+                    chainId: frequencyNetwork.chainId,
+                    chainName: frequencyNetwork.chainName,
+                    nativeCurrency: frequencyNetwork.nativeCurrency,
+                    rpcUrls: frequencyNetwork.rpcUrls,
+                    blockExplorerUrls: frequencyNetwork.blockExplorerUrls
+                }];
+
+                logDebug('网络参数:', params);
+
+                await window.ethereum.request({
+                    method: 'wallet_addEthereumChain',
+                    params: params
+                });
+
+                logDebug('网络添加成功');
+                showStatus('✅ 成功！Frequency TestNet 已添加到您的钱包。', 'success');
+                btn.textContent = '✅ 添加成功';
+
+            } catch (error) {
+                logError('添加网络失败', error);
+                
+                if (error.code === 4001) {
+                    showStatus('❌ 您拒绝了添加网络的请求。', 'error');
+                } else if (error.code === -32002) {
+                    showStatus('⚠️ MetaMask 中已有待处理的请求。请先完成或取消之前的请求。', 'error');
+                } else {
+                    showStatus(`❌ 添加失败: ${error.message || '未知错误'}`, 'error');
+                }
+                
+                btn.disabled = false;
+                btn.textContent = '➕ 添加网络到钱包';
+            }
+        }
+
+        window.addEventListener('load', () => {
+            logDebug('=== 页面加载完成 ===');
+            logDebug('window 对象存在:', typeof window !== 'undefined');
+            logDebug('document 对象存在:', typeof document !== 'undefined');
+            logDebug('navigator 对象存在:', typeof navigator !== 'undefined');
+            logDebug('浏览器信息:', {
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                language: navigator.language
+            });
+            
+            logDebug('检查 window.ethereum...');
+            logDebug('window.ethereum:', window.ethereum);
+            logDebug('typeof window.ethereum:', typeof window.ethereum);
+            
+            if (typeof window.ethereum !== 'undefined') {
+                logDebug('✅ 检测到 MetaMask 钱包');
+                logDebug('MetaMask 对象属性:', Object.keys(window.ethereum));
+                
+                if (window.ethereum.isMetaMask) {
+                    logDebug('✅ 确认为 MetaMask');
+                }
+                
+                if (window.ethereum.selectedAddress) {
+                    logDebug('当前连接的地址:', window.ethereum.selectedAddress);
+                }
+                
+                if (window.ethereum.chainId) {
+                    logDebug('当前 Chain ID:', window.ethereum.chainId);
+                }
+                
+                showStatus('✅ 检测到 MetaMask 钱包，点击按钮添加网络', 'success');
+            } else {
+                logError('未检测到 MetaMask 钱包');
+                logDebug('window 对象中包含 eth 的属性:', Object.keys(window).filter(key => key.toLowerCase().includes('eth')));
+                logDebug('尝试检查其他钱包提供者...');
+                
+                const providers = [
+                    'ethereum',
+                    'web3',
+                    'solana',
+                    'tronWeb'
+                ];
+                
+                providers.forEach(provider => {
+                    if (window[provider]) {
+                        logDebug(`发现 ${provider}:`, window[provider]);
+                    }
+                });
+                
+                showStatus('⚠️ 未检测到 MetaMask 钱包。请先安装 MetaMask 浏览器扩展。', 'info');
+            }
+        });
+    </script>
+</body>
+</html>
